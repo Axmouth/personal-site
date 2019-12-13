@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import os
+
 import debug_toolbar
 from django.contrib import admin
 from django.urls import path, include
@@ -21,6 +23,8 @@ from . import settings
 from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib.flatpages import views
+
+from .settings import BASE_DIR
 
 urlpatterns = [
     path('__debug__/', include(debug_toolbar.urls)),
@@ -34,6 +38,7 @@ urlpatterns = [
 
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=os.path.join(BASE_DIR, 'static'))
 urlpatterns += [
     path('<path:url>', views.flatpage),
     ]
