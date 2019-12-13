@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block page_content %}
+    <div class="col-md-8 offset-md-2">
+        <h1>Category: {{ category | title }}</h1>
+        <hr>
+        {% for post in posts %}
+            {% include "blog_preview.html" %}
+        {% endfor %}
+    </div>
+{% endblock %}

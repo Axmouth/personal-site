@@ -1,0 +1,83 @@
+{% extends "comments/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Preview your comment" %}{% endblock %}
+
+{% block content %}
+  {% load comments %}
+
+<div class="container-fluid bg-light py-3">
+    <form id="comment-form" method="post" action="{% comment_form_target %}" role="form">{% csrf_token %}
+    {% if form.errors %}
+      <h1>{% blocktrans count counter=form.errors|length %}Please correct the error below{% plural %}Please correct the errors below{% endblocktrans %}</h1>
+    {% else %}
+      <h1>{% trans "Preview your comment" %}</h1>
+      <blockquote>{{ comment|linebreaks }}</blockquote>
+      <p>
+        {% trans "and" %} <input id="submit" class="btn btn-primary btn-send" type="submit" name="submit" class="submit-post"
+                                 value="{% trans "Post your comment" %}"/>
+        {# Translators: This string follows the 'Post your comment' submit button. #}
+        {% trans "or make changes" %}:
+      </p>
+    {% endif %}
+  {% if next %}
+    <div><input type="hidden" name="next" value="{{ next }}"/></div>
+  {% endif %}
+  {% for field in form %}
+    {% if field.is_hidden %}
+      <div>{{ field }}</div>
+    {% endif %}
+  {% endfor %}
+        <div class="messages"></div>
+        <div class="controls">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="form_name">Name *</label>
+                        <input id="form_name" type="text" name="name" class="form-control" placeholder="Please enter your name *" required="required" data-error="name is required." value="{{ form.name.value }}">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="form_email">Email *</label>
+                        <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email *" required="required" data-error="Valid email is required." value="{{ form.email.value }}">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="form_url">Website URL</label>
+                        <input id="form_url" type="url" name="url" class="form-control" placeholder="Please enter your website's URL" value="{{ form.url.value }}">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="form_comment">Comment *</label>
+                    <textarea id="form_comment" name="comment" class="form-control" placeholder="Comment for this post *" rows="4" required="required" data-error="send a comment." >{{ form.comment.value }}</textarea>
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
+
+            <p style="display:none;">
+          <label for="id_honeypot">If you enter anything in this field your comment will be treated as spam:</label> <input type="text" name="honeypot" id="id_honeypot">
+        </p>
+            <div class="col-md-12">
+                  <input type="submit" class="btn btn-primary btn-send" name="submit" class="submit-post" value="{% trans "Post" %}"/>
+                  <input type="submit" class="btn btn-primary btn-send" name="preview" class="submit-preview" value="{% trans "Preview" %}"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-muted"><strong>*</strong> These fields are required.</p>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

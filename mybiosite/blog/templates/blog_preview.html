@@ -1,0 +1,15 @@
+<h2><a href="{% url 'blog_detail' post.sub_url %}">{{ post.title }}</a></h2>
+<small>
+    {{ post.created_on.date }} |&nbsp;
+    Categories:&nbsp;
+    {% for category in post.categories.all %}
+        <a href="{% url 'blog_category' category.name %}">
+            {{ category.name }}
+        </a>&nbsp;
+    {% endfor %}
+</small>
+<p>
+    {% autoescape off %}
+        {{ post.description }}...
+    {% endautoescape %}
+</p>

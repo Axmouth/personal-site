@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_content %}
+    <h1>Technology: {{ technology | title }}</h1>
+    <br>
+    <div class="row">
+        {% for project in projects %}
+            {% include "project_preview.html" %}
+        {% endfor %}
+    </div>
+{% endblock %}

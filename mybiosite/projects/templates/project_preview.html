@@ -1,0 +1,21 @@
+<div class="col-md-4">
+    <div class="card mb-2">
+        <img class="card-img-top" src="{{ project.project_image.url }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ project.title }}</h5>
+            <p class="card-text">{{ project.description }}</p>
+            <a href="{% url 'project_detail' project.sub_url %}"
+               class="btn btn-primary">
+                Read More
+            </a>&nbsp;
+            <br>
+            <br>
+            Technologies used:&nbsp;
+            {% for technology in project.technologies_used.all %}
+                <a href="{% url 'project_technology' technology.name %}">
+                    {{ technology.name }}
+                </a>&nbsp;
+            {% endfor %}
+        </div>
+    </div>
+</div>
