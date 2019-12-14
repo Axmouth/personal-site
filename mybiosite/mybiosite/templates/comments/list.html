@@ -2,7 +2,7 @@
 {% load tz %}
 <div id="comments" class="container-fluid bg-light py-3">
     {% for comment in comment_list %}
-        <div class="card" id="c{{ comment.id }}">
+        <div class="card comment-card" id="c{{ comment.id }}">
             <div class="row d-flex">
                 <div class="avatar"></div>
                 <div class="d-flex flex-column">
