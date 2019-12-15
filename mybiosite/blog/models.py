@@ -2,14 +2,18 @@ from django.db import models
 
 
 # Create your models here.
+from django.utils.translation import ugettext_lazy
+
 
 class Category(models.Model):
     name = models.CharField(max_length=20)
 
     def __str__(self):
-        full_path = [self.name]
-        # k = self.parent
         return self.name
+
+    class Meta:
+        verbose_name = ugettext_lazy("Category")
+        verbose_name_plural = ugettext_lazy("Categories")
 
 
 class Post(models.Model):
@@ -28,3 +32,7 @@ class Post(models.Model):
 
     def get_url(self):
         return self.get_url_base() + str(self.sub_url) + '/'
+
+    class Meta:
+        verbose_name = ugettext_lazy("Blog Post")
+        verbose_name_plural = ugettext_lazy("Blog Posts")

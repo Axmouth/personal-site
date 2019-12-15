@@ -1,1 +1,17 @@
-django pillow certifi cffi chardet cryptography django-contrib-comments django-debug-toolbal django-summernote idna pyOpenSSL pycparser pytz setuptools six sqlparse urllib3
+django
+pillow
+certifi
+cffi
+chardet
+cryptography
+django-contrib-comments
+django-debug-toolbar
+django-summernote
+idna
+pyOpenSSL
+pycparser
+pytz
+setuptools
+six
+sqlparse
+urllib3

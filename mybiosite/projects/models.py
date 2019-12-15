@@ -1,16 +1,20 @@
 from django.db import models
 from django.utils.safestring import mark_safe
+from django.utils.translation import ugettext_lazy
 
 
 # Create your models here.
 
 class Technology(models.Model):
+
     name = models.CharField(max_length=20)
 
     def __str__(self):
-        full_path = [self.name]
-        # k = self.parent
         return self.name
+
+    class Meta:
+        verbose_name = ugettext_lazy("Technology")
+        verbose_name_plural = ugettext_lazy("Technologies")
 
 
 class Project(models.Model):
@@ -29,3 +33,7 @@ class Project(models.Model):
 
     def get_url(self):
         return self.get_url_base() + str(self.sub_url) + '/'
+
+    class Meta:
+        verbose_name = ugettext_lazy("Project")
+        verbose_name_plural = ugettext_lazy("Projects")
