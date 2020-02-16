@@ -33,7 +33,7 @@ urlpatterns = [
     path('', include('home_page.urls')),
     path("blog/", include("blog.urls")),
     url(r'^summernote/', include('django_summernote.urls')),
-    url(r'^comments/', include('django_comments.urls')),
+    url(r'^comments/', include('django_comments_xtd.urls')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

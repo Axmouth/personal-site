@@ -27,12 +27,14 @@ class Post(models.Model):
     sub_url = models.CharField(max_length=100, unique=True)
 
     @staticmethod
-    def get_url_base(self):
+    def get_url_base():
         return '/blog/post/'
 
     def get_url(self):
         return self.get_url_base() + str(self.sub_url) + '/'
 
+    def get_absolute_url(self):
+        return self.get_url()
     class Meta:
         verbose_name = ugettext_lazy("Blog Post")
         verbose_name_plural = ugettext_lazy("Blog Posts")

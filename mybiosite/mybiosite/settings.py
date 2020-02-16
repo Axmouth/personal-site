@@ -25,13 +25,15 @@ SECRET_KEY = '8wf)sdd!33ckz6fk=nijskg!dp%@tru#yti7kg^!grr-_8n%xd'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-SITE_ID = 1
+SITE_ID = 0
 
 ALLOWED_HOSTS = [
     'giorgosnikolopoulos.ddns.net',
     'localhost',
     'giorgosnikolop.info'
 ]
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 
 # Application definition
@@ -49,6 +51,7 @@ INSTALLED_APPS = [
     'home_page',
     'django_summernote',
     'django.contrib.sites',
+    'django_comments_xtd',
     'django_comments',
     'debug_toolbar',
     'django.contrib.flatpages',
@@ -85,6 +88,10 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'mybiosite.wsgi.application'
+COMMENTS_APP = 'django_comments_xtd'
+
+# Either enable sending mail messages to the console:
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 # Database

@@ -1,23 +1,15 @@
 
 {% load tz %}
-<div id="comments" class="container-fluid bg-light py-3">
+<div id="comments" class="container-fluid py-3">
     {% for comment in comment_list %}
-        <div class="card comment-card" id="c{{ comment.id }}">
-            <div class="row d-flex">
-                <div class="avatar"></div>
-                <div class="d-flex flex-column">
-                    <h4 class="mt-2 mb-0">by {{ comment.name }}</h4>
-                    <div>
-                    </div>
-                </div>
-                <div class="ml-auto">
-                    <p class="text-muted pt-5 pt-sm-3 posted-at">{{ comment.submit_date|date:"c" }}</p>
-                </div>
+		 <div class="media comment-box" id="c{{ comment.id }}">
+            <div class="media-left">
+                    <img class="img-responsive user-photo" src="https://ssl.gstatic.com/accounts/ui/avatar_2x.png">
             </div>
-            <div class="row text-left">
-                <p class="content">{{ comment.comment }}</p>
-            </div>
-            <div class="row text-left mt-4">
+            <div class="media-body">
+                <div class="media-heading text-light bg-primary"><strong>{{ comment.name }}</strong> <a href="{{ comment.content_object.get_url }}#c{{ comment.id }}" class="float-right"><span class="text-muted pt-5 pt-sm-3 posted-at">{{ comment.submit_date|date:"c" }}</span></a></div>
+                <p class="bg-light">{{ comment.comment }}</p>
+
             </div>
         </div>
     {% endfor %}
