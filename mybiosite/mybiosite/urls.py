@@ -29,8 +29,8 @@ from django.contrib.flatpages import views
 from .settings import BASE_DIR
 
 urlpatterns = [
-    path('__debug__/', include(debug_toolbar.urls)),
     path('admin/', admin.site.urls),
+    path('__debug__/', include(debug_toolbar.urls)),
     path('projects/', include('projects.urls')),
     path('', include('home_page.urls')),
     path("blog/", include("blog.urls")),
