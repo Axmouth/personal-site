@@ -11,6 +11,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . /code/
 
 # ENV DJANGO_DEBUG True
+ARG DJANGO_DEBUG=False
 WORKDIR /code/mybiosite
 RUN python manage.py collectstatic --noinput
 
