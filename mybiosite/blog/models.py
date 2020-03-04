@@ -35,6 +35,7 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return self.get_url()
+
     class Meta:
         verbose_name = ugettext_lazy("Blog Post")
         verbose_name_plural = ugettext_lazy("Blog Posts")

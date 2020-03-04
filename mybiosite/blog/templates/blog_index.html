@@ -1,8 +1,9 @@
 {% extends "blog_base.html" %}
 {% block blog_content %}
-        <h1>Blog Index</h1>
-        <hr>
-        {% for post in posts %}
-            {% include "blog_preview.html" %}
-        {% endfor %}
+    <h1>Blog Index</h1>
+    <h5>{{ result_number }} Entries</h5>
+    <hr>
+    {% for post in posts %}
+        {% include "blog_preview.html" %}
+    {% endfor %}
 {% endblock %}

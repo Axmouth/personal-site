@@ -5,12 +5,14 @@ cffi
 chardet
 cryptography
 django-contrib-comments
+django-comments-xtd
 django-debug-toolbar
 django-summernote
 idna
 pyOpenSSL
 pycparser
 pytz
+psycopg2
 setuptools
 six
 sqlparse

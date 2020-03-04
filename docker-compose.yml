@@ -1,0 +1,45 @@
+version: "3.7"
+services:
+  my_personal_site_postgres:
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+    expose:
+      - "5433"
+    image: axmouth/my_personal_site_postgres
+    container_name: my_personal_site_postgres
+    restart: always
+    environment:
+      LC_ALL: C.UTF-8
+      DJANGO_POSTGRES_DB:
+      DJANGO_POSTGRES_USER:
+      DJANGO_POSTGRES_PASSWORD:
+  my_personal_site_django_server:
+    image: axmouth/my_personal_site_django_server:latest
+    container_name: my_personal_site_django_server
+    restart: always
+    # network_mode: host
+    working_dir: /code/mybiosite
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/code
+      - /var/lib/my_personal_site/media:/code/media
+    ports:
+      - "8000:8000"
+    environment:
+      DJANGO_POSTGRES_DB:
+      DJANGO_POSTGRES_USER:
+      DJANGO_POSTGRES_PORT:
+      DJANGO_POSTGRES_PASSWORD:
+      DJANGO_SESSION_COOKIE_SECURE:
+      DJANGO_CSRF_COOKIE_SECURE:
+      DJANGO_CONN_MAX_AGE:
+      DJANGO_DEBUG:
+      DJANGO_POSTGRES_HOST:
+      DJANGO_SECRET_KEY:
+      DJANGO_EMAIL_HOST:
+      LC_ALL: C.UTF-8
+
+volumes:
+  pgdata:
+  media:
+  static:

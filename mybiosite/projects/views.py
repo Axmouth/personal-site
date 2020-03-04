@@ -1,17 +1,26 @@
 from django.shortcuts import render
 from projects.models import Project, Technology
+from home_page.models import Link
+
+
+def get_links():
+    links = Link.objects.all().order_by('-name')
+    return links
 
 
 def get_project_technologies():
     technologies = Technology.objects.all().order_by('-name')
     return technologies
 
+
 def get_base_context():
     return {
+        'links': get_links(),
         'project_technologies': get_project_technologies(),
     }
 
 # Create your views here.
+
 
 def project_index(request):
     projects = Project.objects.filter(is_published=True)

@@ -9,5 +9,21 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:C:\Users\silve\Documents\MyCodeProjects\mybiosite\mybiosite\db.sqlite3</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="Django default2" uuid="435cc6e8-973d-4172-beef-ad28c207b228">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/mybiosite/mybiosite/settings.py</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1:5432/my_bio_site</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="Django sqlite" uuid="21421871-d804-4d91-ba25-0c044d2973e4">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/mybiosite/mybiosite/settings.py</remarks>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\silve\Documents\MyCodeProjects\mybiosite\mybiosite\db.sqlite3</jdbc-url>
+    </data-source>
   </component>
 </project>

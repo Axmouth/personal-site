@@ -20,15 +20,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '8wf)sdd!33ckz6fk=nijskg!dp%@tru#yti7kg^!grr-_8n%xd'
+# SECRET_KEY = '8wf)sdd!33ckz6fk=nijskg!dp%@tru#yti7kg^!grr-_8n%xd'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '8wf)sdd!33ckz6fk=nijskg!dp%@tru#yti7kg^!grr-_8n%xd')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True') != 'True'
 
-SITE_ID = 0
+SITE_ID = 7
 
 ALLOWED_HOSTS = [
     'giorgosnikolopoulos.ddns.net',
+    'localhost:8000',
     'localhost',
     'giorgosnikolop.info'
 ]
@@ -91,16 +93,33 @@ WSGI_APPLICATION = 'mybiosite.wsgi.application'
 COMMENTS_APP = 'django_comments_xtd'
 
 # Either enable sending mail messages to the console:
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.environ.get('DJANGO_EMAIL_HOST', 'localhost')
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'noreply'
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
+DEFAULT_FROM_EMAIL = "Helpdesk <helpdesk@giorgosnikolop.info>"
 
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    'sqlite': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
+    'default': {
+        # 'NAME': 'my_bio_site',
+        'ENGINE': 'django.db.backends.postgresql',
+        # 'USER': 'my_bio_site_user',
+        'NAME': os.environ.get('DJANGO_POSTGRES_DB', 'my_bio_site'),
+        'USER': os.environ.get('DJANGO_POSTGRES_USER', 'my_bio_site_user'),
+        'HOST': os.environ.get('DJANGO_POSTGRES_HOST', 'host.docker.internal'),
+        'PORT': os.environ.get('DJANGO_POSTGRES_PORT', 5432),
+        'PASSWORD': os.environ.get('DJANGO_POSTGRES_PASSWORD', 'my_bio_site'),
     }
 }
 
@@ -141,7 +160,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static_')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
