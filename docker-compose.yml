@@ -14,7 +14,7 @@ services:
       DJANGO_POSTGRES_USER:
       DJANGO_POSTGRES_PASSWORD:
   my_personal_site_django_server:
-    image: axmouth/my_personal_site_django_server:latest
+    image: axmouth/my_personal_site_django_server
     container_name: my_personal_site_django_server
     restart: always
     # network_mode: host

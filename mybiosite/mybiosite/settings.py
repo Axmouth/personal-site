@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '8wf)sdd!33ckz6fk=nijskg!dp%@tru#yti7kg^!grr-_8n%xd')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG', 'True') != 'True'
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
 
 SITE_ID = 7
 
@@ -35,7 +35,7 @@ ALLOWED_HOSTS = [
     'giorgosnikolop.info'
 ]
 
-X_FRAME_OPTIONS = 'SAMEORIGIN'
+X_FRAME_OPTIONS = 'DENY'
 
 
 # Application definition
@@ -112,9 +112,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     },
     'default': {
-        # 'NAME': 'my_bio_site',
         'ENGINE': 'django.db.backends.postgresql',
-        # 'USER': 'my_bio_site_user',
         'NAME': os.environ.get('DJANGO_POSTGRES_DB', 'my_bio_site'),
         'USER': os.environ.get('DJANGO_POSTGRES_USER', 'my_bio_site_user'),
         'HOST': os.environ.get('DJANGO_POSTGRES_HOST', 'host.docker.internal'),
@@ -269,7 +267,10 @@ SUMMERNOTE_CONFIG = {
     #},
 }
 
-try:
-    from local_settings import *
-except ImportError as exp:
-    pass
+CSRF_COOKIE_SECURE = os.environ.get('DJANGO_CSRF_COOKIE_SECURE', 'True') == 'True'
+SESSION_COOKIE_SECURE = os.environ.get('DJANGO_SESSION_COOKIE_SECURE', 'True') == 'True'
+# SECURE_SSL_REDIRECT = True
+# SECURE_REFERRER_POLICY
+# SECURE_HSTS_SECONDS
+CONN_MAX_AGE = int(os.environ.get('DJANGO_CONN_MAX_AGE', '5'))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

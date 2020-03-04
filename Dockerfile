@@ -1,5 +1,6 @@
 FROM python:3.8
 ENV PYTHONUNBUFFERED 1
+
 # Define working directory
 RUN mkdir /code
 WORKDIR /code
@@ -8,7 +9,6 @@ WORKDIR /code
 COPY requirements.txt /code/
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . /code/
-COPY mybiosite/mybiosite/local_settings.template.py /code/mybiosite/mybiosite/local_settings.template.py
 
 # RUN python /code/mybiosite/manage.py migrate
 
