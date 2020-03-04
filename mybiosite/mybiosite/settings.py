@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 
+
+def is_true_string(s):
+    return s.lower() in ['true', '1', 't', 'y', 'yes', 'yeah', 'yup', 'certainly', 'uh-huh']
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -24,15 +29,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '8wf)sdd!33ckz6fk=nijskg!dp%@tru#yti7kg^!grr-_8n%xd')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
+DEBUG = is_true_string(os.environ.get('DJANGO_DEBUG', 'True'))
 
 SITE_ID = int(os.environ.get('DJANGO_SITE_ID', '8'))
 
 ALLOWED_HOSTS = [
-    os.environ.get('SERVER_IP', '194.5.159.62'),
+    # os.environ.get('SERVER_IP', '194.5.159.62'),
     'localhost:8000',
     'localhost',
-    'giorgosnikolop.info'
+    'giorgosnikolop.info',
+    'www.giorgosnikolop.info',
 ]
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
@@ -158,15 +164,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATIC_URL = '/static/'
-
-print(BASE_DIR)
-print(STATIC_ROOT)
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # STATICFILES_DIRS = [
 #    os.path.join(BASE_DIR, 'static'),
 # ]
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
@@ -270,10 +274,9 @@ SUMMERNOTE_CONFIG = {
     #},
 }
 
-# CSRF_COOKIE_SECURE = os.environ.get('DJANGO_CSRF_COOKIE_SECURE', 'True') == 'True'
-# SESSION_COOKIE_SECURE = os.environ.get('DJANGO_SESSION_COOKIE_SECURE', 'True') == 'True'
-# SECURE_SSL_REDIRECT = True
-# SECURE_REFERRER_POLICY
-# SECURE_HSTS_SECONDS
+# CSRF_COOKIE_SECURE = is_true_string(os.environ.get('DJANGO_CSRF_COOKIE_SECURE', 'True'))
+# SESSION_COOKIE_SECURE = is_true_string(os.environ.get('DJANGO_SESSION_COOKIE_SECURE', 'True'))
+# SECURE_SSL_REDIRECT = is_true_string(os.environ.get('DJANGO_SECURE_SSL_REDIRECT', 'True'))
+# SECURE_REFERRER_POLICY = is_true_string(os.environ.get('DJANGO_SECURE_REFERRER_POLICY', 'True'))
+# SECURE_HSTS_SECONDS = int(os.environ.get('DJANGO_SECURE_HSTS_SECONDS', '5'))
 CONN_MAX_AGE = int(os.environ.get('DJANGO_CONN_MAX_AGE', '5'))
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

@@ -10,6 +10,9 @@ COPY requirements.txt /code/
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . /code/
 
+WORKDIR /code/mybiosite
+RUN python manage.py collectstatic --noinput
+
 # RUN python /code/mybiosite/manage.py migrate
 
 # Set the running environment as production
