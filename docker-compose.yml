@@ -17,7 +17,7 @@ services:
     image: axmouth/my_personal_site_django_server
     container_name: my_personal_site_django_server
     restart: always
-    # network_mode: host
+    network_mode: host
     working_dir: /code/mybiosite
     command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
