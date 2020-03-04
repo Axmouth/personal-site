@@ -29,7 +29,7 @@ DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
 SITE_ID = int(os.environ.get('DJANGO_SITE_ID', '8'))
 
 ALLOWED_HOSTS = [
-    'giorgosnikolopoulos.ddns.net',
+    os.environ.get('SERVER_IP', '194.5.159.62'),
     'localhost:8000',
     'localhost',
     'giorgosnikolop.info'
