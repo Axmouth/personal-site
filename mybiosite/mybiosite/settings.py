@@ -26,7 +26,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '8wf)sdd!33ckz6fk=nijskg!dp%@tr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
 
-SITE_ID = 7
+SITE_ID = int(os.environ.get('DJANGO_SITE_ID', '8'))
 
 ALLOWED_HOSTS = [
     'giorgosnikolopoulos.ddns.net',
@@ -35,7 +35,7 @@ ALLOWED_HOSTS = [
     'giorgosnikolop.info'
 ]
 
-X_FRAME_OPTIONS = 'DENY'
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 
 # Application definition
@@ -60,6 +60,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -67,7 +68,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 ]
 
@@ -112,10 +112,10 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     },
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': os.environ.get('DJANGO_POSTGRES_DB', 'my_bio_site'),
         'USER': os.environ.get('DJANGO_POSTGRES_USER', 'my_bio_site_user'),
-        'HOST': os.environ.get('DJANGO_POSTGRES_HOST', 'host.docker.internal'),
+        'HOST': os.environ.get('DJANGO_POSTGRES_HOST', 'localhost'),
         'PORT': os.environ.get('DJANGO_POSTGRES_PORT', 5432),
         'PASSWORD': os.environ.get('DJANGO_POSTGRES_PASSWORD', 'my_bio_site'),
     }
@@ -158,7 +158,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static_')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
@@ -267,8 +267,8 @@ SUMMERNOTE_CONFIG = {
     #},
 }
 
-CSRF_COOKIE_SECURE = os.environ.get('DJANGO_CSRF_COOKIE_SECURE', 'True') == 'True'
-SESSION_COOKIE_SECURE = os.environ.get('DJANGO_SESSION_COOKIE_SECURE', 'True') == 'True'
+# CSRF_COOKIE_SECURE = os.environ.get('DJANGO_CSRF_COOKIE_SECURE', 'True') == 'True'
+# SESSION_COOKIE_SECURE = os.environ.get('DJANGO_SESSION_COOKIE_SECURE', 'True') == 'True'
 # SECURE_SSL_REDIRECT = True
 # SECURE_REFERRER_POLICY
 # SECURE_HSTS_SECONDS
