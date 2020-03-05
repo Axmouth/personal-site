@@ -1,25 +1,12 @@
 version: "3.7"
 services:
-  my_personal_site_postgres:
-    volumes:
-      - pgdata:/var/lib/postgresql/data/
-    expose:
-      - "5433"
-    image: axmouth/my_personal_site_postgres
-    container_name: my_personal_site_postgres
-    restart: always
-    environment:
-      LC_ALL: C.UTF-8
-      DJANGO_POSTGRES_DB:
-      DJANGO_POSTGRES_USER:
-      DJANGO_POSTGRES_PASSWORD:
   my_personal_site_django_server:
     image: axmouth/my_personal_site_django_server
     container_name: my_personal_site_django_server
     restart: always
     network_mode: host
     working_dir: /code/mybiosite
-    command: bash -c "python manage.py migrate && uvicorn mybiosite.asgi:application --port 8000 --host 0.0.0.0"
+    command: bash -c "python manage.py migrate && uvicorn mybiosite.asgi:application --port 8000 --host 0.0.0.0 --workers 2"
     volumes:
       - /var/lib/my_personal_site/media:/code/mybiosite/media
     ports:
@@ -38,6 +25,3 @@ services:
       DJANGO_EMAIL_HOST:
       DJANGO_SITE_ID:
       LC_ALL: C.UTF-8
-
-volumes:
-  pgdata:
