@@ -1,3 +1,5 @@
+import os
+
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail, BadHeaderError
@@ -49,7 +51,9 @@ def contact_me(request):
             from_email = form.cleaned_data['from_email']
             message = form.cleaned_data['message']
             try:
-                send_mail(subject, message, from_email, ['contact@giorgosnikolop.info'])
+                send_mail(subject, message, from_email, [
+                    os.environ.get('DJANGO_CONTACT_EMAIL', 'contact@giorgosnikolop.info')
+                ])
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return redirect('success')

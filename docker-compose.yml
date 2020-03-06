@@ -24,4 +24,5 @@ services:
       DJANGO_SECRET_KEY:
       DJANGO_EMAIL_HOST:
       DJANGO_SITE_ID:
+      DJANGO_CONTACT_EMAIL:
       LC_ALL: C.UTF-8
