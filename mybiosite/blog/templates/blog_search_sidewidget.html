@@ -1,0 +1,16 @@
+
+
+            <!-- Search Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">Search</h5>
+                <div class="card-body">
+                    <form id="searchform" action="{% url 'blog_search' %}" method="get" accept-charset="utf-8">
+                        <div class="input-group">
+                            <input type="text" name="q" class="form-control" placeholder="Search for..." id="searchbox">
+                            <span class="input-group-btn">
+                                <button class="btn btn-secondary" type="submit">Go!</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>

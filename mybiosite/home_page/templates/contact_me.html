@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-md-8 offset-md-1">
+            <div class="card my-4">
+                <h5 class="card-header">Contact Me</h5>
+                <div class="card-body">
+
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div class="form-actions">
+                          <button type="submit" class="btn btn-primary mb-2">Send</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-3">
+
+            {% include "links_sidewidget.html" %}
+
+        </div>
+
+    </div>
+{% endblock %}

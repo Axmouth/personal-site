@@ -1,0 +1,15 @@
+
+
+            <!-- Categories Widget -->
+            <div class="card my-4">
+                <h5 class="card-header">Project Technologies</h5>
+                <div class="card-body">
+                    <ul class="list-unstyled mb-0 row">
+                        {% for project_technology in project_technologies %}
+                            <li class="col-lg-12">
+                                <a href="{% url 'project_technology' project_technology.name %}">{{ project_technology }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>

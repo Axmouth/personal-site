@@ -11,19 +11,8 @@
         <!-- Sidebar Widgets Column -->
         <div class="col-md-3">
 
-            <!-- Side Widget -->
-            <div class="card my-4">
-                <h5 class="card-header">My Links</h5>
-                <div class="card-body">
-                    <ul class="list-unstyled mb-0 row">
-                        {% for link in links %}
-                            <li class="col-lg-12">
-                                <a href="{{ link.link_target }}"><img src="{{ link.link_image.url }}" border="1" height="15rem" object-fit="cover">    {{ link.name }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
+
+            {% include "links_sidewidget.html" %}
 
         </div>
     </div>
