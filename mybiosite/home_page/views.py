@@ -1,5 +1,7 @@
 import os
 
+from django.contrib.sites import requests
+from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail, BadHeaderError
@@ -8,7 +10,7 @@ from projects.models import Project
 from home_page.models import Link, TextBody
 from home_page.forms import ContactForm
 
-from mybiosite.settings import EMAIL_HOST
+from django.conf import settings
 
 
 def get_links():
@@ -42,11 +44,29 @@ def home_page(request):
 
 def contact_me(request):
     context = get_base_context()
+    context['HCAPTCHA_SITE_KEY'] = settings.HCAPTCHA_SITE_KEY
     if request.method == 'GET':
         form = ContactForm()
     else:
         form = ContactForm(request.POST)
         if form.is_valid():
+
+            captcha_response = request.POST.get('h-captcha-response')
+            data = {
+                'secret': settings.HCAPTCHA_SECRET_KEY,
+                'response': captcha_response,
+                'remoteip': request.META.get("REMOTE_ADDR"),
+            }
+            r = requests.post(settings.CAPTCHA_VERIFY_LINK, data=data)
+            result = r.json()
+
+            if result['success']:
+                pass
+            else:
+                messages.error(request, 'Invalid reCAPTCHA. Please try again.')
+                context['errors'] = ['Invalid Captcha']
+                return render(request, 'contact_me.html', context)
+
             subject = form.cleaned_data['subject']
             from_email = form.cleaned_data['from_email']
             message = form.cleaned_data['message']

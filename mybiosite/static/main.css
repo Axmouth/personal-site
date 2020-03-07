@@ -31,7 +31,7 @@ footer {
     padding-right: 10px;
     width: 65px;
 }
-.comment-box .media-body p {
+.comment-box .media-body .comment {
     border: 1px solid #ddd;
     padding: 10px;
 }
