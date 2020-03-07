@@ -15,10 +15,10 @@
             </a>&nbsp;
         {% endfor %}
         <br><br><br><br><br>
-        {% load comments %}
+        {% load comments comments_xtd %}
         {% get_comment_count for post as comment_count %}
         <h1>{{ comment_count }} Comments </h1>
         {% render_comment_form for post %}
-        {% render_comment_list for post %}
+        {% render_xtdcomment_tree for post %}
 
 {% endblock %}

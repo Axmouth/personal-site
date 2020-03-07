@@ -57,6 +57,8 @@ def contact_me(request):
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
             return redirect('contact_success')
+        else:
+            context['errors'] = ['Invalid Captcha']
     context['form'] = form
     return render(request, 'contact_me.html', context)
 

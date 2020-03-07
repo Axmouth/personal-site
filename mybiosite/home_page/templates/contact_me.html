@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block page_content %}
+    <script src="https://hcaptcha.com/1/api.js" async defer></script>
     <div class="row">
         <div class="col-md-8 offset-md-1">
             <div class="card my-4">
@@ -10,6 +11,7 @@
                     <form method="post">
                         {% csrf_token %}
                         {{ form.as_p }}
+                        <div class="h-captcha" data-sitekey="5f471c86-6027-4bfa-b5db-de9163975300"></div>
                         <div class="form-actions">
                           <button type="submit" class="btn btn-primary mb-2">Send</button>
                         </div>
