@@ -26,6 +26,9 @@ class Post(models.Model):
     is_published = models.BooleanField(default=False)
     sub_url = models.CharField(max_length=100, unique=True)
 
+    def __str__(self):
+        return self.title
+
     @staticmethod
     def get_url_base():
         return '/blog/post/'
