@@ -1,4 +1,4 @@
-Django==3.0.3
+Django==3.0.4
 certifi==2019.11.28
 cffi==1.14.0
 chardet==3.0.4
@@ -10,9 +10,10 @@ django-summernote==0.8.11.6
 idna==2.9
 Pillow==7.0.0
 pyOpenSSL==19.1.0
-pycparser==2.19
+pycparser==2.20
 pytz==2019.3
 psycopg2==2.8.4
+requests==2.23.0
 setuptools==45.2.0
 six==1.14.0
 sqlparse==0.3.1
@@ -23,8 +24,10 @@ asgiref==3.2.3
 attrs==19.3.0
 autobahn==20.3.1
 Automat==20.2.0
+bson==0.5.8
 Click==7.0
 constantly==15.1.0
+dataclasses==0.7
 djangorestframework==3.11.0
 docutils==0.16
 h11==0.9.0
@@ -33,6 +36,8 @@ incremental==17.5.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 PyHamcrest==2.0.2
+pymongo==3.10.1
+python-dateutil==2.8.1
 service-identity==18.1.0
 Twisted==19.10.0
 txaio==20.1.1

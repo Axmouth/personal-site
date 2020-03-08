@@ -282,4 +282,4 @@ CONN_MAX_AGE = int(os.environ.get('DJANGO_CONN_MAX_AGE', '5'))
 
 HCAPTCHA_SITE_KEY = os.environ.get('DJANGO_HCAPTCHA_SITE_KEY', '10000000-ffff-ffff-ffff-000000000001')
 HCAPTCHA_SECRET_KEY = os.environ.get('DJANGO_HCAPTCHA_SECRET_KEY', '0x0000000000000000000000000000000000000000 ')
-CAPTCHA_VERIFY_LINK = os.environ.get('DJANGO_HCAPTCHA_VERIFY_LINK', ' https://hcaptcha.com/siteverify ')
+CAPTCHA_VERIFY_LINK = os.environ.get('DJANGO_HCAPTCHA_VERIFY_LINK', 'https://hcaptcha.com/siteverify')

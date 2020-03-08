@@ -1,6 +1,6 @@
 import os
 
-from django.contrib.sites import requests
+import requests
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -47,7 +47,7 @@ def contact_me(request):
     context['HCAPTCHA_SITE_KEY'] = settings.HCAPTCHA_SITE_KEY
     if request.method == 'GET':
         form = ContactForm()
-    else:
+    elif request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
 
@@ -57,7 +57,9 @@ def contact_me(request):
                 'response': captcha_response,
                 'remoteip': request.META.get("REMOTE_ADDR"),
             }
+            print(data)
             r = requests.post(settings.CAPTCHA_VERIFY_LINK, data=data)
+            print(r)
             result = r.json()
 
             if result['success']:
