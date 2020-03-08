@@ -1,6 +1,10 @@
 import os
 
 import requests
+
+import json
+import urllib
+
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -52,15 +56,16 @@ def contact_me(request):
         if form.is_valid():
 
             captcha_response = request.POST.get('h-captcha-response')
-            data = {
+            values = {
                 'secret': settings.HCAPTCHA_SECRET_KEY,
                 'response': captcha_response,
                 'remoteip': request.META.get("REMOTE_ADDR"),
             }
-            print(data)
-            r = requests.post(settings.CAPTCHA_VERIFY_LINK, data=data)
-            print(r)
-            result = r.json()
+
+            data = urllib.parse.urlencode(values).encode()
+            req = urllib.request.Request(settings.CAPTCHA_VERIFY_LINK, data=data)
+            response = urllib.request.urlopen(req)
+            result = json.loads(response.read().decode())
 
             if result['success']:
                 pass
