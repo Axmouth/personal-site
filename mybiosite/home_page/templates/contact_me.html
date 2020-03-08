@@ -2,6 +2,19 @@
 
 {% block page_content %}
     <script src="https://hcaptcha.com/1/api.js" async defer></script>
+
+    <script async defer>
+
+        function captchaComplete(token) {
+            $("#contact-button").attr('disabled', false);
+        }
+
+        function captchaExpired(token) {
+            $("#contact-button").attr('disabled', true);
+        }
+
+    </script>
+
     <div class="row">
         <div class="col-md-8 offset-md-1">
             <div class="card my-4">
@@ -11,9 +24,11 @@
                     <form method="post">
                         {% csrf_token %}
                         {{ form.as_p }}
-                        <div class="h-captcha" data-sitekey="{{ HCAPTCHA_SITE_KEY }}"></div>
+                        <div class="h-captcha" data-sitekey="{{ HCAPTCHA_SITE_KEY }}" data-callback="captchaComplete"
+                             data-expired-callback="captchaExpired"></div>
                         <div class="form-actions">
-                          <button type="submit" class="btn btn-primary mb-2">Send</button>
+                            <button autocomplete="off" id="contact-button" type="submit" class="btn btn-primary mb-2" disabled>Message Me
+                            </button>
                         </div>
                     </form>
 

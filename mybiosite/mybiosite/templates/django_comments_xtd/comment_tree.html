@@ -87,6 +87,6 @@
     Array.prototype.forEach.call(postDates, function (elements, index) {
         let utcDate = elements.innerText;  // ISO-8601 formatted date returned from server
         let localDate = new Date(utcDate);
-        elements.innerText = 'posted at ' + localDate.toLocaleDateString("en-US", options);
+        elements.innerText = localDate.toLocaleDateString("en-US", options);
     });
 </script>
