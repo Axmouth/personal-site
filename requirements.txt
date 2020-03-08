@@ -13,7 +13,6 @@ pyOpenSSL
 pycparser
 pytz
 psycopg2
-requests
 setuptools
 six
 sqlparse
