@@ -1,1 +1,3 @@
-pip freeze -r devel-req.txt > stable-req.txt
+#!/bin/bash
+
+pip freeze -r requirements.txt > stable-req.txt
