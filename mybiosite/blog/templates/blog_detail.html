@@ -1,24 +1,25 @@
 {% extends "blog_base.html" %}
 {% block blog_content %}
-        <h1>{{ post.title }}</h1>
-        <small>
-            {{ post.created_on.date }}&nbsp;
-        </small>
+    <h1>{{ post.title }}</h1>
+    <small>
+        {{ post.created_on.date }}&nbsp;
+    </small>
+    <div class="blog-content">
         {% autoescape off %}
             {{ post.content }}
-        {% endautoescape %}
-        <br><br>
-        Categories:&nbsp;
-        {% for category in post.categories.all %}
-            <a href="{% url 'blog_category' category.name %}">
-                {{ category.name }}
-            </a>&nbsp;
-        {% endfor %}
-        <br><br><br><br><br>
-        {% load comments comments_xtd %}
-        {% get_comment_count for post as comment_count %}
-        <h1>{{ comment_count }} Comments </h1>
-        {% render_comment_form for post %}
-        {% render_xtdcomment_tree for post %}
+        {% endautoescape %}</div>
+    <br><br>
+    Categories:&nbsp;
+    {% for category in post.categories.all %}
+        <a href="{% url 'blog_category' category.name %}">
+            {{ category.name }}
+        </a>&nbsp;
+    {% endfor %}
+    <br><br><br><br><br>
+    {% load comments comments_xtd %}
+    {% get_comment_count for post as comment_count %}
+    <h1>{{ comment_count }} Comments </h1>
+    {% render_comment_form for post %}
+    {% render_xtdcomment_tree for post %}
 
 {% endblock %}

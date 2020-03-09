@@ -35,6 +35,7 @@ SITE_ID = int(os.environ.get('DJANGO_SITE_ID', '8'))
 
 ALLOWED_HOSTS = [
     # os.environ.get('SERVER_IP', '194.5.159.62'),
+    # '*',
     'localhost:8000',
     'localhost',
     'giorgosnikolop.info',

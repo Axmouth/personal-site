@@ -23,7 +23,7 @@
                     {% if item.comment.user and item.comment.user|has_permission:"django_comments.can_moderate" %}
                         &nbsp;<span class="badge badge-secondary">{% trans "moderator" %}</span>{% endif %}
                     <a href="{{ item.comment.content_object.get_url }}#c{{ item.comment.id }}"
-                       class="float-right"><span
+                       class=""><span
                             class="text-muted pt-5 pt-sm-3 posted-at">{{ item.comment.submit_date|date:"c" }}</span></a>
                 </div>
                 <div class="comment bg-light">
@@ -87,6 +87,6 @@
     Array.prototype.forEach.call(postDates, function (elements, index) {
         let utcDate = elements.innerText;  // ISO-8601 formatted date returned from server
         let localDate = new Date(utcDate);
-        elements.innerText = localDate.toLocaleDateString("en-US", options);
+        elements.innerText = 'posted at ' + localDate.toLocaleDateString("en-US", options);
     });
 </script>
