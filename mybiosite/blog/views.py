@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import render
 from blog.models import Post, Category
 from home_page.models import Link
@@ -45,9 +46,7 @@ def blog_search(request):
     query = request.GET.get('q')
     qs = Post.objects
     for word in query.split(' '):
-        qs = qs.filter(title__icontains=word)
-        qs = qs.filter(description__icontains=word)
-        qs = qs.filter(content__icontains=word)
+        qs = qs.filter(Q(title__icontains=word) | Q(description__icontains=word) | Q(content__icontains=word))
     posts = qs.filter(is_published=True).order_by('-created_on')
     context = get_base_context()
     context['query'] = query
