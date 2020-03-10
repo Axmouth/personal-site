@@ -1,5 +1,5 @@
 .main-content {
-    margin-top: 60px;
+    margin-top: 7em;
     min-height: 100vh;
 }
 
@@ -48,7 +48,8 @@ footer {
     content: "";
     width: 12px;
     height: 12px;
-    background-color: #2C3E50;
+    /* background-color: #2C3E50; */
+    background-color: #EB6864;
     border: 1px solid #ddd;
     border-width: 1px 0 0 1px;
     -webkit-transform: rotate(-45deg);
@@ -69,3 +70,4 @@ iframe {
 img {
     max-width: 95%;
 }
+
