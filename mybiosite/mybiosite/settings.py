@@ -198,7 +198,7 @@ SUMMERNOTE_CONFIG = {
         'airMode': False,
 
         # Change editor size
-        'width': '75%%',
+        'width': '95%%',
         # 'height': '480',
 
         # Use proper language setting automatically (default)
