@@ -1,5 +1,6 @@
 from django.db.models import Q
 from django.shortcuts import render
+from django.http import HttpResponseForbidden, HttpResponseNotFound, Http404
 from blog.models import Post, Category
 from home_page.models import Link
 
@@ -31,7 +32,9 @@ def blog_index(request):
     """
     Display a Blog List page ordered by most recent.
     """
-    posts = Post.objects.filter(is_published=True).order_by('-created_on')
+    posts = Post.objects.order_by('-created_on')
+    if not request.user.is_staff:
+        posts = posts.filter(is_published=True)
     context = get_base_context()
     result_number = posts.count()
     context['result_number'] = result_number
@@ -47,7 +50,9 @@ def blog_search(request):
     qs = Post.objects
     for word in query.split(' '):
         qs = qs.filter(Q(title__icontains=word) | Q(description__icontains=word) | Q(content__icontains=word))
-    posts = qs.filter(is_published=True).order_by('-created_on')
+    if not request.user.is_staff:
+        qs = qs.filter(is_published=True)
+    posts = qs.order_by('-created_on')
     context = get_base_context()
     context['query'] = query
     context['posts'] = posts
@@ -65,6 +70,8 @@ def blog_category(request, category):
     ).order_by(
         '-created_on'
     )
+    if not request.user.is_staff:
+        posts = posts.filter(is_published=True)
     context = get_base_context()
     result_number = posts.count()
     context['result_number'] = result_number
@@ -78,7 +85,8 @@ def blog_detail(request, sub_url):
     Display a Blog Post with its comments.
     """
     post = Post.objects.get(sub_url=sub_url)
-
+    if not request.user.is_staff and not post.is_published:
+        raise Http404
     context = get_base_context()
     context['post'] = post
     return render(request, 'blog_detail.html', context)

@@ -1,6 +1,12 @@
 {% extends "blog_base.html" %}
 {% block blog_content %}
     <h1>{{ post.title }}</h1>
+
+    {% if not post.is_published %}
+        <div class="alert alert-warning alert-dismissible fade show">
+            <strong>Warning!</strong> Is not published.
+        </div>
+    {% endif %}
     <small>
         {{ post.created_on.date }}&nbsp;
     </small>

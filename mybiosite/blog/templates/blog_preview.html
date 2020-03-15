@@ -1,4 +1,9 @@
 <h2><a href="{% url 'blog_detail' post.sub_url %}">{{ post.title }}</a></h2>
+{% if not post.is_published %}
+    <div class="alert alert-warning alert-dismissible fade show">
+        <strong>Warning!</strong> Is not published.
+    </div>
+{% endif %}
 <small>
     {{ post.created_on.date }} |&nbsp;
     Categories:&nbsp;
