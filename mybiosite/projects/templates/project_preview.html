@@ -3,6 +3,12 @@
         <img class="card-img-top" src="{{ project.project_image.url }}" style="max-height:24rem">
         <div class="card-body">
             <h5 class="card-title">{{ project.title }}</h5>
+        
+            {% if not project.is_published %}
+                <div class="alert alert-warning alert-dismissible fade show">
+                    <strong>Warning!</strong> Is not published.
+                </div>
+            {% endif %}
             <p class="card-text">{{ project.description }}</p>
             <a href="{% url 'project_detail' project.sub_url %}"
                class="btn btn-primary">
