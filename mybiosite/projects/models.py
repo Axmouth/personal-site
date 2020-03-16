@@ -26,6 +26,8 @@ class Project(models.Model):
     technologies_used = models.ManyToManyField('Technology', related_name='projects')
     is_published = models.BooleanField(default=False)
     sub_url = models.CharField(max_length=100, unique=True)
+    is_featured = models.BooleanField(default=False)
+    display_rank = models.FloatField(default=0)
 
     @staticmethod
     def get_url_base(self):
